@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+@import "./styles/variables.css";
+
+* {
+  box-sizing: border-box; /* для того чтобы padding и border не увеличивали суммарный размер блока */
+}
+
+body {
+  margin: 0; /* убираем внешние отступы */
+  background-color: var(--gradient-main); /* устанавливаем цвет фона */
+  color: var(--color-text); /* устанавливаем цвет текста */
+  font-family: "Inter", sans-serif;
+  /*Подготовка к атмосферным эффектам*/
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 520px;
+  height: 520px;
+  top: -180px;
+  left: 10%;
+  background: rgba(193, 126, 52, 0.18);
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+  animation: autumnGlow 14s ease-in-out infinite alternate;
+}
+
+/*Медленное движение свечения*/
+@keyframes autumnGlow {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(180px, 100px) scale(1.15);
+  }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  width: 450px;
+  height: 450px;
+  bottom: -120px;
+  right: -120px;
+  background: rgba(217, 154, 69, 0.14);
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Убираем стандартные ограничения браузера */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+/* Делаем изображения адаптивными*/
+img {
+  max-width: 100%;
+  display: block;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}

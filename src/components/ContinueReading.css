@@ -1,0 +1,344 @@
+.reading-section {
+  position: relative;
+  z-index: 3;
+
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 18px;
+
+  margin-top: 20px;
+}
+
+/* =========================
+   ПРОДОЛЖИТЬ ЧТЕНИЕ
+========================= */
+
+.reading-content {
+  min-height: 172px;
+
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  padding: 16px;
+
+  background: transparent !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 22px;
+
+  box-shadow: none;
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  transition: transform 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.reading-content:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(217, 107, 155, 0.24);
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 0 0 25px rgba(217, 107, 155, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* =========================
+   ОБЛОЖКА
+========================= */
+
+.reading-cover {
+  width: 130px;
+  height: 140px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(217, 107, 155, 0.28),
+    rgba(156, 122, 199, 0.22)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.reading-cover-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(244, 237, 245, 0.48);
+
+  font-size: 12px;
+}
+
+/* =========================
+   ИНФОРМАЦИЯ
+========================= */
+
+.reading-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.reading-label {
+  margin: 0 0 8px;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  color: #ed8db5;
+
+  text-shadow: 0 0 12px rgba(217, 107, 155, 0.25);
+}
+
+.reading-info h2 {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 30px;
+  font-weight: 600;
+
+  color: #f4edf5;
+
+  line-height: 1.05;
+}
+
+.reading-author {
+  margin: 6px 0 18px;
+
+  color: rgba(244, 237, 245, 0.52);
+
+  font-size: 12px;
+}
+
+/* =========================
+   ПРОГРЕСС
+========================= */
+
+.reading-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 14px;
+}
+
+.reading-progress {
+  flex: 1;
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.reading-progress-value {
+  width: 72%;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(90deg, #d96b9b, #ed8db5, #b892dc);
+
+  box-shadow: 0 0 12px rgba(237, 141, 181, 0.4);
+}
+
+.reading-progress-row span {
+  color: rgba(244, 237, 245, 0.65);
+
+  font-size: 11px;
+}
+
+/* =========================
+   КНОПКА
+========================= */
+
+.continue-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 9px 16px;
+
+  border: 1px solid rgba(237, 141, 181, 0.3);
+  border-radius: 11px;
+
+  background: rgba(217, 107, 155, 0.1);
+
+  color: #f4ddea;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 18px rgba(217, 107, 155, 0.08);
+
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.continue-button span {
+  color: #ed8db5;
+  font-size: 15px;
+}
+
+.continue-button:hover {
+  transform: translateY(-2px);
+
+  background: rgba(217, 107, 155, 0.18);
+
+  border-color: rgba(237, 141, 181, 0.48);
+
+  box-shadow: 0 8px 24px rgba(217, 107, 155, 0.16);
+}
+
+/* =========================
+   ЦИТАТА
+========================= */
+
+.quote-card {
+  position: relative;
+
+  min-height: 172px;
+
+  padding: 26px 28px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.025)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 22px;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.quote-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 170px;
+  height: 170px;
+
+  right: -65px;
+  bottom: -75px;
+
+  border-radius: 50%;
+
+  background: rgba(217, 107, 155, 0.12);
+
+  filter: blur(45px);
+
+  pointer-events: none;
+}
+
+.quote-mark {
+  position: absolute;
+
+  top: 12px;
+  left: 22px;
+
+  font-family: Georgia, serif;
+
+  font-size: 48px;
+
+  line-height: 1;
+
+  color: rgba(237, 141, 181, 0.55);
+
+  text-shadow: 0 0 18px rgba(217, 107, 155, 0.22);
+}
+
+.quote-card p {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 17px;
+  line-height: 1.45;
+
+  color: rgba(244, 237, 245, 0.72);
+}
+
+.quote-decoration {
+  position: absolute;
+
+  right: 24px;
+  top: 24px;
+
+  color: rgba(237, 141, 181, 0.6);
+
+  font-size: 17px;
+
+  text-shadow: 0 0 14px rgba(217, 107, 155, 0.45);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 850px) {
+  .reading-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .reading-content {
+    gap: 16px;
+    padding: 12px;
+  }
+
+  .reading-cover {
+    width: 95px;
+    height: 125px;
+  }
+
+  .reading-info h2 {
+    font-size: 25px;
+  }
+
+  .reading-author {
+    margin-bottom: 12px;
+  }
+
+  .quote-card {
+    min-height: 150px;
+    padding: 24px;
+  }
+}

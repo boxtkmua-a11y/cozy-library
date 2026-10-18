@@ -1,0 +1,382 @@
+/* Основная страница */
+.reader-page {
+  min-height: calc(100vh - 83px);
+  padding: 70px 80px 100px 290px;
+
+  background: radial-gradient(
+      circle at 70% 20%,
+      rgba(217, 107, 155, 0.1),
+      transparent 35%
+    ),
+    #100d16;
+
+  color: #f4edf5;
+}
+
+/* Панель управления */
+.reader-toolbar {
+  position: relative;
+
+  width: min(1000px, 100%);
+  margin: 0 auto 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 8px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+
+  background: rgba(16, 13, 22, 0.62);
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Кнопки */
+.reader-back,
+.reader-settings {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  color: rgba(244, 237, 245, 0.72);
+
+  cursor: pointer;
+
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.reader-back {
+  padding: 10px 16px;
+  font-size: 12px;
+}
+
+.reader-settings {
+  width: 42px;
+  height: 42px;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+}
+
+.reader-back:hover,
+.reader-settings:hover {
+  background: rgba(217, 107, 155, 0.1);
+  border-color: rgba(237, 141, 181, 0.28);
+  color: #f4ddea;
+  transform: translateY(-2px);
+}
+
+/* Настройки */
+.reader-settings-panel {
+  position: absolute;
+
+  top: 58px;
+  right: 0;
+
+  width: 220px;
+
+  padding: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  background: rgba(31, 24, 40, 0.9);
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  z-index: 20;
+}
+
+.reader-settings-panel p {
+  width: 100%;
+  margin: 0 0 6px;
+
+  color: #f4ddea;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.reader-settings-panel button {
+  padding: 7px 12px;
+
+  border: 1px solid rgba(237, 141, 181, 0.28);
+  border-radius: 9px;
+
+  background: rgba(217, 107, 155, 0.08);
+
+  color: #f4edf5;
+
+  cursor: pointer;
+}
+
+.reader-font-size {
+  min-width: 42px;
+
+  text-align: center;
+
+  color: rgba(244, 237, 245, 0.62);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.reader-theme-buttons {
+  width: 100%;
+
+  display: flex;
+  gap: 6px;
+
+  margin-top: 6px;
+}
+
+.reader-theme-buttons button {
+  flex: 1;
+}
+
+/* Заголовок */
+.reader-header {
+  width: min(760px, 100%);
+
+  margin: 0 auto 45px;
+
+  text-align: center;
+}
+
+.reader-label {
+  margin-bottom: 12px;
+
+  color: #ed8db5;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 3px;
+}
+
+.reader-header h1 {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.reader-author {
+  margin-top: 10px;
+
+  color: rgba(244, 237, 245, 0.55);
+
+  font-size: 14px;
+}
+
+/* Текст */
+.reader-content {
+  width: min(760px, 100%);
+
+  margin: 0 auto;
+
+  padding: 45px 55px;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.reader-content p {
+  margin: 0 0 24px;
+
+  color: rgba(244, 237, 245, 0.78);
+
+  font-family: "Cormorant Garamond", serif;
+
+  line-height: 1.8;
+}
+
+/* Главы */
+.reader-chapter {
+  margin: 45px 0 30px;
+
+  color: #f2d8e5;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-weight: 600;
+
+  text-align: center;
+}
+
+/* Прогресс */
+.reader-progress {
+  position: fixed;
+
+  left: 50%;
+  bottom: 24px;
+
+  transform: translateX(-50%);
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 9px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+
+  background: rgba(16, 13, 22, 0.82);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  color: rgba(244, 237, 245, 0.48);
+
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.reader-progress strong {
+  color: #ed8db5;
+  font-weight: 600;
+}
+
+/* Тёплая тема */
+.reader-page.warm {
+  background: radial-gradient(
+      circle at 70% 20%,
+      rgba(196, 139, 104, 0.14),
+      transparent 35%
+    ),
+    #17120f;
+}
+
+.reader-page.warm .reader-content {
+  background: rgba(255, 226, 198, 0.045);
+  border-color: rgba(255, 220, 190, 0.12);
+}
+
+.reader-page.warm .reader-content p {
+  color: rgba(248, 231, 213, 0.8);
+}
+
+.reader-page.warm .reader-label {
+  color: #d9a77f;
+}
+
+/* Светлая тема */
+.reader-page.light {
+  background: radial-gradient(
+      circle at 70% 20%,
+      rgba(217, 107, 155, 0.08),
+      transparent 35%
+    ),
+    #eee9e4;
+
+  color: #302a2d;
+}
+
+.reader-page.light .reader-header h1 {
+  color: #2f272b;
+}
+
+.reader-page.light .reader-author {
+  color: rgba(48, 42, 45, 0.55);
+}
+
+.reader-page.light .reader-content {
+  background: rgba(255, 252, 248, 0.72);
+
+  border-color: rgba(80, 65, 70, 0.12);
+
+  box-shadow: 0 20px 60px rgba(60, 45, 40, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.reader-page.light .reader-content p {
+  color: #3f3438;
+}
+
+.reader-page.light .reader-chapter {
+  color: #403337;
+}
+
+.reader-page.light .reader-label {
+  color: #b05d83;
+}
+
+.reader-page.light .reader-back,
+.reader-page.light .reader-settings {
+  background: rgba(255, 255, 255, 0.55);
+
+  border-color: rgba(80, 65, 70, 0.14);
+
+  color: rgba(48, 42, 45, 0.7);
+}
+
+.reader-page.light .reader-progress {
+  background: rgba(248, 244, 240, 0.94);
+
+  border-color: rgba(80, 65, 70, 0.14);
+
+  color: rgba(48, 42, 45, 0.55);
+}
+
+.reader-page.light .reader-progress strong {
+  color: #b05d83;
+}
+
+/* Мобильная версия */
+@media (max-width: 800px) {
+  .reader-page {
+    padding: 45px 20px 80px;
+  }
+
+  .reader-toolbar {
+    width: 100%;
+    padding: 7px 8px;
+  }
+
+  .reader-header h1 {
+    font-size: 38px;
+  }
+
+  .reader-content {
+    padding: 30px 24px;
+  }
+
+  .reader-progress {
+    bottom: 16px;
+  }
+}

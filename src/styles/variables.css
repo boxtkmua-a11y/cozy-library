@@ -1,0 +1,60 @@
+/* Глобальные переменные дизайна приложения: осенняя футуристичная тема */
+
+:root {
+  /* Основной фон */
+  --color-background: #17131d;
+  --color-background-deep: #100d16;
+
+  /* Стеклянные поверхности */
+  --color-surface: rgba(40, 31, 50, 0.72);
+  --color-surface-light: rgba(255, 255, 255, 0.07);
+  --color-surface-hover: rgba(255, 255, 255, 0.11);
+
+  /* Текст */
+  --color-text: #f4edf5;
+  --color-text-soft: rgba(244, 237, 245, 0.68);
+  --color-text-muted: rgba(244, 237, 245, 0.45);
+
+  /* Акцент Cozy Library */
+  --color-primary: #d96b9b;
+  --color-primary-light: #ed8db5;
+  --color-primary-soft: rgba(217, 107, 155, 0.18);
+
+  /* Дополнительный лиловый */
+  --color-purple: #9c7ac7;
+  --color-purple-soft: rgba(156, 122, 199, 0.18);
+
+  /* Золотистый акцент */
+  --color-gold: #e3b36f;
+  --color-gold-soft: rgba(227, 179, 111, 0.16);
+
+  /* Границы */
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-border-strong: rgba(255, 255, 255, 0.18);
+
+  /* Скругления */
+  --radius-small: 12px;
+  --radius-medium: 18px;
+  --radius-large: 28px;
+
+  /* Тени */
+  --shadow-soft: 0 12px 35px rgba(0, 0, 0, 0.22);
+
+  --shadow-glow: 0 0 35px rgba(217, 107, 155, 0.14);
+
+  /* Размытие */
+  --glass-blur: blur(20px);
+
+  /* Основной градиент */
+  --gradient-main: radial-gradient(
+      circle at 15% 20%,
+      rgba(217, 107, 155, 0.16),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(156, 122, 199, 0.16),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #100d16 0%, #17131d 45%, #211827 100%);
+}
