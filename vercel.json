@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/gutendex/:path*",
+      "destination": "https://gutendex.com/:path*"
+    },
+    {
+      "source": "/gutenberg/:path*",
+      "destination": "https://www.gutenberg.org/:path*"
+    }
+  ]
+}
