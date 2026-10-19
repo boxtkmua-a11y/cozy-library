@@ -1,34 +1,73 @@
 import { useEffect, useState } from "react";
 import "./BookDetails.css";
 import { getBookDetails } from "../services/bookApi";
+import { findReaderBook } from "../services/readerApi";
 
 function BookDetails({ book, onReadClick }) {
   const [details, setDetails] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
+  const [availability, setAvailability] = useState("checking");
 
   useEffect(() => {
     if (!book?.key) return;
 
+    let cancelled = false;
+
     async function loadDetails() {
-      const details = await getBookDetails(
+      const result = await getBookDetails(
         book.key,
         book.title,
         book.author_name?.[0]
       );
-      setDetails(details);
+
+      if (!cancelled) {
+        setDetails(result);
+      }
     }
+
     loadDetails();
+
+    return () => {
+      cancelled = true;
+    };
   }, [book]);
+
+  useEffect(() => {
+    if (!book) return;
+
+    let cancelled = false;
+
+    async function checkAvailability() {
+      setAvailability("checking");
+
+      try {
+        const result = await findReaderBook(book);
+
+        if (!cancelled) {
+          setAvailability(result ? "available" : "unavailable");
+        }
+      } catch (error) {
+        console.error("Ошибка проверки доступности текста:", error);
+
+        if (!cancelled) {
+          setAvailability("unavailable");
+        }
+      }
+    }
+
+    checkAvailability();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [book]);
+
   useEffect(() => {
     if (!book?.key) return;
 
     const savedBooks = JSON.parse(localStorage.getItem("cozy-library") || "[]");
 
-    const alreadySaved = savedBooks.some(
-      (savedBook) => savedBook.key === book.key
-    );
-
-    setIsSaved(alreadySaved);
+    setIsSaved(savedBooks.some((savedBook) => savedBook.key === book.key));
   }, [book]);
 
   function handleSaveBook() {
@@ -38,13 +77,9 @@ function BookDetails({ book, onReadClick }) {
       (savedBook) => savedBook.key === book.key
     );
 
-    if (alreadySaved) {
-      return;
-    }
+    if (alreadySaved) return;
 
-    const updatedBooks = [...savedBooks, book];
-
-    localStorage.setItem("cozy-library", JSON.stringify(updatedBooks));
+    localStorage.setItem("cozy-library", JSON.stringify([...savedBooks, book]));
 
     setIsSaved(true);
   }
@@ -60,7 +95,6 @@ function BookDetails({ book, onReadClick }) {
   return (
     <main className="book-details">
       <div className="book-details-content">
-        {/* Обложка */}
         <div className="book-details-cover">
           {book.cover_i ? (
             <img
@@ -72,7 +106,6 @@ function BookDetails({ book, onReadClick }) {
           )}
         </div>
 
-        {/* Информация */}
         <div className="book-details-info">
           <p className="book-details-label">ДЕТАЛИ КНИГИ</p>
 
@@ -118,14 +151,29 @@ function BookDetails({ book, onReadClick }) {
           </div>
 
           <div className="book-details-actions">
-            <button className="read-button" onClick={onReadClick}>
-              Начать читать
+            <button
+              className="read-button"
+              onClick={onReadClick}
+              disabled={availability !== "available"}
+            >
+              {availability === "checking"
+                ? "Проверяем доступность..."
+                : availability === "available"
+                ? "Начать читать"
+                : "Текст недоступен"}
             </button>
 
             <button className="save-button" onClick={handleSaveBook}>
               {isSaved ? "✓ В библиотеке" : "♡ Добавить в библиотеку"}
             </button>
           </div>
+
+          {availability === "unavailable" && (
+            <p role="status">
+              Полный текст этой книги не найден в нашем источнике — Gutenberg.
+              Добавить книгу в библиотеку по-прежнему можно.
+            </p>
+          )}
         </div>
       </div>
     </main>

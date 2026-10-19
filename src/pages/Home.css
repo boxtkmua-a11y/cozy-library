@@ -41,13 +41,46 @@
       transparent 35%,
       rgba(8, 6, 13, 0.55) 100%
     ),
-    url("/Backgrounds/var2.jpg");
+    url("/Backgrounds/var11.jpg");
 
   background-size: cover;
 
   background-position: center;
 
   background-repeat: no-repeat;
+}
+
+/* Зимний фон */
+:root[data-theme="winter"] .home-background {
+  background-image: linear-gradient(
+      90deg,
+      rgba(5, 10, 22, 0.55),
+      rgba(5, 10, 22, 0.12) 55%,
+      rgba(5, 10, 22, 0.35)
+    ),
+    url("/Backgrounds/wintervar5.jpg");
+}
+
+/* Весенний фон */
+:root[data-theme="spring"] .home-background {
+  background-image: linear-gradient(
+      90deg,
+      rgba(18, 13, 24, 0.5),
+      rgba(18, 13, 24, 0.1) 55%,
+      rgba(18, 13, 24, 0.3)
+    ),
+    url("/Backgrounds/springvar5.jpg");
+}
+
+/* Летний фон */
+:root[data-theme="summer"] .home-background {
+  background-image: linear-gradient(
+      90deg,
+      rgba(15, 20, 15, 0.5),
+      rgba(15, 20, 15, 0.1) 55%,
+      rgba(15, 20, 15, 0.3)
+    ),
+    url("/Backgrounds/summer.jpg");
 }
 
 /* =========================================

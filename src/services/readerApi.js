@@ -1,4 +1,5 @@
 const GUTENDEX_URL = "/gutendex/books/";
+const readerBookCache = new Map();
 
 const titleAliases = {
   "грозовой перевал": "Wuthering Heights",
@@ -100,6 +101,11 @@ export async function findReaderBook(book) {
     console.error("Для поиска текста не передан объект книги.");
     return null;
   }
+  const cacheKey = book.key || book.title;
+
+  if (readerBookCache.has(cacheKey)) {
+    return readerBookCache.get(cacheKey);
+  }
 
   const titles = getTitles(book);
 
@@ -123,6 +129,14 @@ export async function findReaderBook(book) {
 
       const data = await response.json();
       const results = data.results || [];
+      console.log(
+        "Книги, полученные от Gutendex:",
+        results.map((item) => ({
+          id: item.id,
+          title: item.title,
+          formats: item.formats,
+        }))
+      );
 
       console.log("Результатов Gutenberg:", results.length);
 
@@ -149,7 +163,7 @@ export async function findReaderBook(book) {
       console.log("Найден текст:", match.item.title);
       console.log("Ссылка на текст:", match.textUrl);
 
-      return {
+      const readerBook = {
         id: match.item.id,
         title: match.item.title,
         author: match.item.authors?.[0]?.name || "",
@@ -157,11 +171,18 @@ export async function findReaderBook(book) {
         formats: match.item.formats,
         textUrl: match.textUrl,
       };
+
+      readerBookCache.set(cacheKey, readerBook);
+
+      return readerBook;
     } catch (error) {
       console.warn("Запрос Gutenberg не удался:", title, error.message);
     }
   }
 
   console.log("Полный текст не найден в Gutenberg:", book.title);
+
+  readerBookCache.set(cacheKey, null);
+
   return null;
 }

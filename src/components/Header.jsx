@@ -1,9 +1,40 @@
 import "./Header.css";
-function Header({ onLibraryClick }) {
+
+// Доступные сезонные темы
+const SEASONS = [
+  { id: "autumn", label: "Осень" },
+  { id: "winter", label: "Зима" },
+  { id: "spring", label: "Весна" },
+  { id: "summer", label: "Лето" },
+];
+
+function Header({ onLibraryClick, theme, onThemeChange }) {
+  // Находим название выбранного сезона для отображения в кнопке
+  const currentSeason =
+    SEASONS.find((season) => season.id === theme) || SEASONS[0];
+
   return (
     <header className="header">
       <div className="logo">Cozy Library</div>
+
       <div className="header-actions">
+        <label className="season-selector">
+          <span className="season-label">Сезон</span>
+
+          <select
+            className="season-select"
+            value={theme}
+            onChange={(event) => onThemeChange(event.target.value)}
+            aria-label="Выбрать сезон оформления"
+          >
+            {SEASONS.map((season) => (
+              <option key={season.id} value={season.id}>
+                {season.icon} {season.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
         <button className="library-button" onClick={onLibraryClick}>
           Моя библиотека
         </button>
@@ -19,4 +50,5 @@ function Header({ onLibraryClick }) {
     </header>
   );
 }
+
 export default Header;

@@ -328,7 +328,18 @@ function Reader({ book }) {
 
           // Преобразуем адрес Gutenberg в адрес через локальный прокси Vite.
           const sourceUrl = new URL(result.textUrl);
+
+          if (
+            sourceUrl.hostname !== "www.gutenberg.org" &&
+            sourceUrl.hostname !== "gutenberg.org"
+          ) {
+            throw new Error(`Неожиданный адрес книги: ${result.textUrl}`);
+          }
+
           const proxyUrl = `/gutenberg${sourceUrl.pathname}${sourceUrl.search}`;
+
+          console.log("[Reader] Исходный URL:", result.textUrl);
+          console.log("[Reader] URL прокси:", proxyUrl);
 
           const response = await fetch(proxyUrl);
 

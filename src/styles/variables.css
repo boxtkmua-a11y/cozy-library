@@ -1,60 +1,149 @@
-/* Глобальные переменные дизайна приложения: осенняя футуристичная тема */
-
+/* Общие настройки Cozy Library */
 :root {
-  /* Основной фон */
   --color-background: #17131d;
   --color-background-deep: #100d16;
 
-  /* Стеклянные поверхности */
   --color-surface: rgba(40, 31, 50, 0.72);
   --color-surface-light: rgba(255, 255, 255, 0.07);
   --color-surface-hover: rgba(255, 255, 255, 0.11);
 
-  /* Текст */
   --color-text: #f4edf5;
   --color-text-soft: rgba(244, 237, 245, 0.68);
   --color-text-muted: rgba(244, 237, 245, 0.45);
 
-  /* Акцент Cozy Library */
   --color-primary: #d96b9b;
   --color-primary-light: #ed8db5;
   --color-primary-soft: rgba(217, 107, 155, 0.18);
 
-  /* Дополнительный лиловый */
   --color-purple: #9c7ac7;
   --color-purple-soft: rgba(156, 122, 199, 0.18);
 
-  /* Золотистый акцент */
   --color-gold: #e3b36f;
   --color-gold-soft: rgba(227, 179, 111, 0.16);
 
-  /* Границы */
   --color-border: rgba(255, 255, 255, 0.12);
   --color-border-strong: rgba(255, 255, 255, 0.18);
 
-  /* Скругления */
   --radius-small: 12px;
   --radius-medium: 18px;
   --radius-large: 28px;
 
-  /* Тени */
   --shadow-soft: 0 12px 35px rgba(0, 0, 0, 0.22);
-
   --shadow-glow: 0 0 35px rgba(217, 107, 155, 0.14);
-
-  /* Размытие */
   --glass-blur: blur(20px);
+}
 
-  /* Основной градиент */
+/* Осенняя тема */
+:root,
+:root[data-theme="autumn"] {
+  --color-primary: #d99a45;
+  --color-primary-light: #f0bd76;
+  --color-primary-soft: rgba(217, 154, 69, 0.18);
+
+  --color-purple: #a58ac4;
+  --color-gold: #e3b36f;
+
   --gradient-main: radial-gradient(
       circle at 15% 20%,
-      rgba(217, 107, 155, 0.16),
+      rgba(193, 126, 52, 0.18),
       transparent 32%
     ),
     radial-gradient(
       circle at 85% 15%,
-      rgba(156, 122, 199, 0.16),
+      rgba(156, 122, 199, 0.13),
       transparent 30%
     ),
     linear-gradient(135deg, #100d16 0%, #17131d 45%, #211827 100%);
+
+  --season-glow: rgba(193, 126, 52, 0.18);
+  --season-overlay: linear-gradient(
+    135deg,
+    rgba(190, 105, 30, 0.22),
+    transparent 55%,
+    rgba(230, 155, 65, 0.12)
+  );
+}
+
+/* Зимняя тема */
+:root[data-theme="winter"] {
+  --color-primary: #8bbfe8;
+  --color-primary-light: #c4e5ff;
+  --color-primary-soft: rgba(139, 191, 232, 0.18);
+
+  --color-purple: #9d9edb;
+  --color-gold: #c9d8e8;
+
+  --gradient-main: radial-gradient(
+      circle at 15% 20%,
+      rgba(100, 160, 220, 0.18),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(143, 126, 210, 0.15),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #0b111c 0%, #111b2b 48%, #1b2438 100%);
+
+  --season-glow: rgba(100, 160, 220, 0.18);
+  --season-overlay: linear-gradient(
+    135deg,
+    rgba(55, 125, 210, 0.32),
+    transparent 55%,
+    rgba(145, 190, 245, 0.18)
+  );
+}
+
+/* Весенняя тема */
+:root[data-theme="spring"] {
+  --color-primary: #d99bb8;
+  --color-primary-light: #f1c3d7;
+  --color-primary-soft: rgba(217, 155, 184, 0.18);
+
+  --color-purple: #aa94cb;
+  --color-gold: #d9c49a;
+
+  --gradient-main: radial-gradient(
+      circle at 15% 20%,
+      rgba(195, 153, 178, 0.18),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(151, 172, 143, 0.14),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #15121b 0%, #211a25 48%, #28222e 100%);
+
+  --season-glow: rgba(195, 153, 178, 0.18);
+}
+
+/* Летняя тема */
+:root[data-theme="summer"] {
+  --color-primary: #d9b66e;
+  --color-primary-light: #f3d99a;
+  --color-primary-soft: rgba(217, 182, 110, 0.18);
+
+  --color-purple: #8e9cbd;
+  --color-gold: #e8c879;
+
+  --gradient-main: radial-gradient(
+      circle at 15% 20%,
+      rgba(219, 177, 91, 0.18),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(91, 142, 119, 0.16),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #101713 0%, #17221d 48%, #202c25 100%);
+
+  --season-glow: rgba(219, 177, 91, 0.18);
+  --season-overlay: linear-gradient(
+    135deg,
+    rgba(220, 165, 55, 0.26),
+    transparent 55%,
+    rgba(85, 155, 110, 0.16)
+  );
 }

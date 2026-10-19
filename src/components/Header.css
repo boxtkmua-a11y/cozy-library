@@ -1,5 +1,6 @@
 /* Верхняя панель Cozy Library */
 
+/* Верхняя панель Cozy Library */
 .header {
   position: sticky;
   top: 0;
@@ -8,17 +9,18 @@
   width: 100%;
   padding: 16px 32px;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
+  gap: 20px;
 
   background: linear-gradient(
     120deg,
     rgba(22, 17, 29, 0.94),
     rgba(38, 27, 48, 0.9)
   );
-  backdrop-filter: blur(20px);
 
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(217, 107, 155, 0.2);
 
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25),
@@ -55,12 +57,40 @@
   gap: 14px;
 }
 
+/* Выпадающий список сезонных тем */
+.season-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+
+  border: 1px solid rgba(217, 107, 155, 0.3);
+  border-radius: 12px;
+  background: rgba(217, 107, 155, 0.08);
+
+  color: #f4edf5;
+  font-size: 13px;
+}
+
+/* Список сезонов */
+.season-select {
+  max-width: 125px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #f4edf5;
+  cursor: pointer;
+}
+
+/* Цвет вариантов в раскрытом списке */
+.season-select option {
+  background: #211827;
+  color: #f4edf5;
+}
+
 /* Кнопка библиотеки */
 
 .library-button {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   padding: 10px 18px;
 
   border: 1px solid rgba(217, 107, 155, 0.35);
@@ -89,7 +119,7 @@
 
   color: #fff4e4;
 
-  transform: translateX(-50%) translateY(-2px);
+  transform: translateY(-2px);
 
   box-shadow: 0 8px 25px rgba(217, 107, 155, 0.18);
 }
@@ -159,5 +189,65 @@
   .menu-button {
     width: 40px;
     height: 40px;
+  }
+}
+
+/* Расположение элементов шапки */
+.logo {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.header-actions {
+  grid-column: 2;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.menu-button {
+  grid-column: 3;
+  justify-self: end;
+}
+
+/* Адаптация для небольших экранов */
+@media (max-width: 700px) {
+  .header {
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 14px 18px;
+  }
+
+  .logo {
+    grid-column: 1;
+    font-size: 25px;
+  }
+
+  .header-actions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .menu-button {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .library-button {
+    display: inline-flex;
+    position: static;
+    transform: none;
+  }
+
+  .library-button:hover {
+    background: rgba(217, 107, 155, 0.18);
+    border-color: rgba(217, 107, 155, 0.45);
+    color: #fff4e4;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(217, 107, 155, 0.18);
   }
 }
