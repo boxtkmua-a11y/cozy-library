@@ -41,7 +41,7 @@
       transparent 35%,
       rgba(8, 6, 13, 0.55) 100%
     ),
-    url("/src/assets/Backgrounds/var2.jpg");
+    url("/Backgrounds/var2.jpg");
 
   background-size: cover;
 
