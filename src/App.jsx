@@ -114,7 +114,7 @@ function App() {
 
       {page === "search" && <Search onBookClick={handleBookClick} />}
 
-      {page === "library" && <Library />}
+      {page === "library" && <Library onBookClick={handleBookClick} />}
 
       {page === "book-details" && (
         <BookDetails book={selectedBook} onReadClick={handleReadClick} />

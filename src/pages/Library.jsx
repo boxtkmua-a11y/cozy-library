@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 import "./Library.css";
 
-function Library() {
+function Library({ onBookClick }) {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -14,8 +14,9 @@ function Library() {
   return (
     <main className="library">
       <h1>Моя библиотека</h1>
+
       <p className="library-subtitle">
-        Твоё пространство для любимых историй,в которое всегда хочется
+        Твоё пространство для любимых историй, в которое всегда хочется
         возвращаться.
       </p>
 
@@ -24,7 +25,12 @@ function Library() {
       ) : (
         <div className="library-books">
           {books.map((book) => (
-            <BookCard key={book.key} book={book} isLibrary={true} />
+            <BookCard
+              key={book.key}
+              book={book}
+              isLibrary={true}
+              onBookClick={onBookClick}
+            />
           ))}
         </div>
       )}

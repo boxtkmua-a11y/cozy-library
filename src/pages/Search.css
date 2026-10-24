@@ -68,11 +68,17 @@
   line-height: 1.7;
 }
 
-.search-page > .search-bar {
+/* Контейнер поиска вместе с полем и результатами */
+.search-page > div {
   position: relative;
   z-index: 3;
   width: min(760px, 100%);
   margin: 0 auto;
+}
+
+/* Поле поиска занимает доступную ширину */
+.search-page .search-bar {
+  width: 100%;
 }
 
 @media (max-width: 1100px) {

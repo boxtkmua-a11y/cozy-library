@@ -448,11 +448,26 @@ function Reader({ book }) {
         )}
 
         {!readerLoading && readerBook && !readerText && (
-          <p>Книга найдена, но текст пока не удалось загрузить.</p>
-        )}
+          <div className="reader-unavailable">
+            <p>
+              {readerBook.source === "googlebooks"
+                ? "Найден вариант просмотра в Google Books."
+                : readerBook.source === "openlibrary"
+                ? "Найдено издание в Open Library."
+                : "Книга найдена, но текст не удалось загрузить."}
+            </p>
 
-        {!readerLoading && !readerBook && !readerText && (
-          <p>Текст этой книги пока не найден.</p>
+            {readerBook.readerUrl && (
+              <a
+                className="reader-source-link"
+                href={readerBook.readerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Открыть книгу у источника ↗
+              </a>
+            )}
+          </div>
         )}
 
         {readerText &&

@@ -472,3 +472,26 @@
     }
   }
 }
+
+.reader-unavailable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.reader-source-link {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 1px solid var(--accent-color, #c084fc);
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.reader-source-link:hover {
+  background: rgba(192, 132, 252, 0.12);
+}
