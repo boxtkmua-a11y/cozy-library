@@ -5,19 +5,13 @@
 
 .home {
   position: relative;
-
   min-height: calc(100vh - 83px);
-
   padding: 42px 60px 80px 290px;
-
   overflow: hidden;
-
   background: #100d16;
 }
 
-/* =========================================
-   ФОН
-   ========================================= */
+/* Фон */
 
 .home-background {
   position: fixed;
@@ -25,115 +19,72 @@
   z-index: 0;
   pointer-events: none;
 
-  background-image: linear-gradient(
+  background-image:
+    /* Глубокая тень слева под интерфейсом */ linear-gradient(
       90deg,
-      rgba(8, 6, 13, 0.72) 0%,
-      rgba(8, 6, 13, 0.35) 25%,
-      rgba(8, 6, 13, 0.18) 55%,
-      rgba(8, 6, 13, 0.48) 100%
+      rgba(5, 3, 8, 0.82) 0%,
+      rgba(5, 3, 8, 0.62) 25%,
+      rgba(5, 3, 8, 0.22) 52%,
+      rgba(5, 3, 8, 0.04) 75%,
+      rgba(5, 3, 8, 0.18) 100%
     ),
-    linear-gradient(
-      180deg,
-      rgba(8, 6, 13, 0.45) 0%,
-      transparent 35%,
-      rgba(8, 6, 13, 0.55) 100%
-    ),
+    /* Затемнение верхней области */
+      linear-gradient(
+        180deg,
+        rgba(5, 3, 8, 0.55) 0%,
+        rgba(5, 3, 8, 0.12) 28%,
+        transparent 48%,
+        rgba(5, 3, 8, 0.08) 68%,
+        rgba(5, 3, 8, 0.42) 100%
+      ),
+    /* Локальная глубина под текстом */
+      radial-gradient(
+        ellipse at 36% 24%,
+        rgba(5, 3, 8, 0.42) 0%,
+        rgba(5, 3, 8, 0.18) 34%,
+        transparent 65%
+      ),
     url("/Backgrounds/topfon3.png");
 
-  background-size: 100% auto;
-  background-position: center top;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% auto;
+  background-position: center, center, center, center top;
   background-repeat: no-repeat;
 }
 
-/* Зимний фон */
-:root[data-theme="winter"] .home-background {
-  background-image: linear-gradient(
-      90deg,
-      rgba(5, 10, 22, 0.55),
-      rgba(5, 10, 22, 0.12) 55%,
-      rgba(5, 10, 22, 0.35)
-    ),
-    url("/Backgrounds/wintervar5.jpg");
-}
-
-/* Весенний фон */
-:root[data-theme="spring"] .home-background {
-  background-image: linear-gradient(
-      90deg,
-      rgba(18, 13, 24, 0.5),
-      rgba(18, 13, 24, 0.1) 55%,
-      rgba(18, 13, 24, 0.3)
-    ),
-    url("/Backgrounds/springvar5.jpg");
-}
-
-/* Летний фон */
-:root[data-theme="summer"] .home-background {
-  background-image: linear-gradient(
-      90deg,
-      rgba(15, 20, 15, 0.5),
-      rgba(15, 20, 15, 0.1) 55%,
-      rgba(15, 20, 15, 0.3)
-    ),
-    url("/Backgrounds/summer.jpg");
-}
-
-/* =========================================
-   ОСНОВНОЙ КОНТЕНТ
-   ========================================= */
+/* Основной контент */
 
 .home-content {
   position: relative;
-
   z-index: 2;
-
   width: min(1120px, 100%);
-
   margin: 0 auto;
 }
 
-/* =========================================
-   WELCOME
-   ========================================= */
+/* Приветствие */
 
 .welcome-section {
   position: relative;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-start;
-
   padding: 38px 34px 24px;
-
   min-height: 360px;
 }
 
-/* =========================================
-   ОРБИТА
-   ========================================= */
+/* Орбита */
 
 .welcome-orbit {
   position: absolute;
-
   width: 700px;
   height: 118px;
-
   left: 365px;
   top: 4px;
-
   transform: translateX(-50%) rotate(-7deg);
-
   border: 1px solid rgba(239, 164, 213, 0.62);
-
   border-radius: 50%;
-
   box-shadow: 0 0 7px rgba(239, 164, 213, 0.42),
     0 0 20px rgba(217, 107, 155, 0.23), 0 0 38px rgba(190, 130, 255, 0.11);
-
   pointer-events: none;
-
   z-index: 1;
 
   -webkit-mask-image: linear-gradient(
@@ -157,27 +108,17 @@
   );
 }
 
-/* =========================================
-   ЗАГОЛОВОК
-   ========================================= */
+/* Заголовок */
 
 .welcome-title {
   position: relative;
-
   z-index: 3;
-
   margin: 22px 0 10px;
-
   font-family: "Cormorant Garamond", serif;
-
   font-size: 48px;
-
   font-weight: 600;
-
   line-height: 1.05;
-
   color: #f5dce9;
-
   text-shadow: 0 0 18px rgba(217, 107, 155, 0.2), 0 3px 20px rgba(0, 0, 0, 0.35);
   animation: welcomeFloating 5s ease-in-out infinite;
 }
@@ -187,82 +128,55 @@
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-6px);
   }
 }
 
-/* =========================================
-   ТЕКСТ ПОД ЗАГОЛОВКОМ
-   ========================================= */
+/* Текст под заголовком */
 
 .welcome-text {
   position: relative;
-
   z-index: 3;
-
   max-width: 610px;
-
   margin: 0 0 26px;
-
   color: rgba(244, 237, 245, 0.7);
-
   font-size: 14px;
-
   line-height: 1.65;
-
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
-/* =========================================
-   ПОИСК
-   ========================================= */
+/* Поиск */
 
 .welcome-search {
   position: relative;
-
   z-index: 5;
-
   width: min(700px, 100%);
 }
-
-/* SearchBar внутри Home */
 
 .welcome-search .search-bar {
   width: 100%;
-
   background: rgba(20, 15, 28, 0.4);
-
   border: 1px solid rgba(255, 255, 255, 0.18);
-
   border-radius: 15px;
-
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-
   backdrop-filter: blur(16px);
-
   -webkit-backdrop-filter: blur(16px);
 }
 
-/* =========================================
-   ПРОДОЛЖИТЬ ЧТЕНИЕ
-   ========================================= */
+/* Продолжить чтение */
 
 .home .reading-section {
   position: relative;
-
   z-index: 3;
-
   display: block;
-
   width: min(700px, 100%);
-
   margin: 4px 0 0 34px;
 }
 
-/* Убираем вторую цитату —
-   в утверждённом референсе её нет */
+/* Убираем вторую цитату */
 
 .home .quote-card {
   display: none;
@@ -272,46 +186,30 @@
 
 .home .reading-content {
   min-height: 170px;
-
   display: flex;
-
   align-items: center;
-
   gap: 24px;
-
   padding: 16px;
-
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.105),
     rgba(255, 255, 255, 0.035)
   );
-
   border: 1px solid rgba(255, 255, 255, 0.15);
-
   border-radius: 20px;
-
   box-shadow: 0 20px 55px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-
   backdrop-filter: blur(18px);
-
   -webkit-backdrop-filter: blur(18px);
 }
 
-/* =========================================
-   RECOMMENDATIONS
-   ========================================= */
+/* Рекомендации */
 
 .recommendations {
   position: relative;
-
   z-index: 3;
-
   width: 100%;
-
   margin-top: 30px;
-
   padding-left: 34px;
 }
 
@@ -319,113 +217,75 @@
 
 .section-heading {
   display: flex;
-
   align-items: center;
-
   gap: 12px;
-
   margin-bottom: 18px;
 }
 
 .section-heading h2 {
   margin: 0;
-
   font-family: "Cormorant Garamond", serif;
-
   font-size: 29px;
-
   font-weight: 600;
-
   color: #f4edf5;
-
   text-shadow: 0 0 18px rgba(217, 107, 155, 0.14);
 }
 
-/* стрелка */
+/* Стрелка */
 
 .section-arrow {
   width: 30px;
-
   height: 30px;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   border: 1px solid rgba(237, 141, 181, 0.25);
-
   border-radius: 50%;
-
   background: rgba(217, 107, 155, 0.08);
-
   color: #ed8db5;
-
   font-size: 16px;
-
   cursor: pointer;
-
   transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .section-arrow:hover {
   transform: translateX(3px);
-
   background: rgba(217, 107, 155, 0.16);
-
   box-shadow: 0 0 18px rgba(217, 107, 155, 0.15);
 }
 
-/* =========================================
-   КНИГИ
-   ========================================= */
+/* Книги */
 
 .recommendation-books {
   display: grid;
-
   grid-template-columns: repeat(5, minmax(0, 1fr));
-
   gap: 18px;
-
   width: 100%;
 }
 
 .recommendation-card {
   position: relative;
-
   min-width: 0;
-
   overflow: hidden;
-
   padding: 10px;
-
   background: linear-gradient(
     145deg,
     rgba(255, 255, 255, 0.075),
     rgba(255, 255, 255, 0.025)
   );
-
   border: 1px solid rgba(255, 255, 255, 0.12);
-
   border-radius: 17px;
-
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-
   backdrop-filter: blur(16px);
-
   -webkit-backdrop-filter: blur(16px);
-
   transition: transform 0.45s ease, border-color 0.45s ease,
     box-shadow 0.45s ease;
 }
 
 .recommendation-card:hover {
   transform: translateY(-5px);
-
   border-color: rgba(237, 141, 181, 0.3);
-
   box-shadow: 0 22px 45px rgba(0, 0, 0, 0.32),
     0 0 22px rgba(217, 107, 155, 0.08);
 }
@@ -434,29 +294,19 @@
 
 .recommendation-cover {
   width: 100%;
-
   aspect-ratio: 0.68;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   overflow: hidden;
-
   border-radius: 11px;
-
   background: linear-gradient(
     145deg,
     rgba(217, 107, 155, 0.34),
     rgba(110, 82, 145, 0.3)
   );
-
   border: 1px solid rgba(255, 255, 255, 0.08);
-
   color: rgba(244, 237, 245, 0.45);
-
   font-size: 11px;
 }
 
@@ -464,15 +314,10 @@
 
 .recommendation-card h3 {
   margin: 10px 3px 0;
-
   font-family: "Cormorant Garamond", serif;
-
   font-size: 16px;
-
   font-weight: 600;
-
   line-height: 1.15;
-
   color: #f4edf5;
 }
 
@@ -480,28 +325,21 @@
 
 .recommendation-card p {
   margin: 5px 3px 2px;
-
   color: rgba(244, 237, 245, 0.48);
-
   font-size: 10px;
-
   line-height: 1.3;
 }
 
-/* =========================================
-   АДАПТИВ
-   ========================================= */
+/* Адаптив */
 
 @media (max-width: 1100px) {
   .home {
     padding-left: 270px;
-
     padding-right: 30px;
   }
 
   .welcome-orbit {
     width: 570px;
-
     left: 330px;
   }
 
@@ -521,9 +359,7 @@
 
   .welcome-section {
     align-items: center;
-
     text-align: center;
-
     padding: 35px 10px 20px;
   }
 
@@ -537,15 +373,12 @@
 
   .welcome-orbit {
     width: 560px;
-
     left: 50%;
-
     top: 28px;
   }
 
   .home .reading-section {
     width: 100%;
-
     margin-left: 0;
   }
 
@@ -569,19 +402,16 @@
 
   .welcome-orbit {
     width: 430px;
-
     height: 170px;
   }
 
   .home .reading-content {
     gap: 14px;
-
     padding: 12px;
   }
 
   .recommendation-books {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
     gap: 14px;
   }
 }
@@ -593,7 +423,6 @@
 
   .welcome-orbit {
     width: 360px;
-
     height: 145px;
   }
 

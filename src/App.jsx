@@ -14,55 +14,95 @@ function App() {
   const [page, setPage] = useState("home");
   const [selectedBook, setSelectedBook] = useState(null);
 
+  // Храним состояние мобильного меню
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // Загружаем сохранённую тему или используем осеннюю по умолчанию
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("cozy-library-theme");
     return THEMES.includes(savedTheme) ? savedTheme : "autumn";
   });
 
-  // Сохраняем выбранный сезон и обновляем оформление приложения
+  // Сохраняем выбранную тему
   function handleThemeChange(nextTheme) {
     if (!THEMES.includes(nextTheme)) return;
 
     setTheme(nextTheme);
     localStorage.setItem("cozy-library-theme", nextTheme);
   }
+
   // Применяем выбранную тему ко всему документу
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
-  console.log("Выбранная тема:", theme);
 
+  // Закрываем меню при нажатии Escape
+  useEffect(() => {
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  // Переключаем страницу и закрываем меню
+  function navigateTo(nextPage) {
+    setPage(nextPage);
+    setIsMenuOpen(false);
+  }
+
+  // Открываем страницу выбранной книги
   function handleBookClick(book) {
-    console.log("APP получил книгу:", book.title);
     setSelectedBook(book);
-    setPage("book-details");
+    navigateTo("book-details");
   }
 
+  // Открываем Reader
   function handleReadClick() {
-    setPage("reader");
+    navigateTo("reader");
   }
 
+  // Продолжаем чтение выбранной книги
   function handleContinueReading(book) {
     if (!book) return;
 
     setSelectedBook(book);
-    setPage("reader");
+    navigateTo("reader");
+  }
+
+  // Возвращаемся к описанию книги из Reader
+  function handleBackFromReader() {
+    navigateTo("book-details");
   }
 
   return (
     <div className="app" data-theme={theme}>
       <Header
-        onLibraryClick={() => setPage("library")}
+        onLibraryClick={() => navigateTo("library")}
         theme={theme}
         onThemeChange={handleThemeChange}
+        // Переключаем меню и выводим состояние в консоль
+        onMenuClick={() => {
+          setIsMenuOpen((open) => {
+            return !open;
+          });
+        }}
+        isMenuOpen={isMenuOpen}
       />
 
       <Sidebar
         page={page}
-        onHomeClick={() => setPage("home")}
-        onSearchClick={() => setPage("search")}
-        onLibraryClick={() => setPage("library")}
+        isMenuOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        onHomeClick={() => navigateTo("home")}
+        onSearchClick={() => navigateTo("search")}
+        onLibraryClick={() => navigateTo("library")}
       />
 
       {page === "home" && (
@@ -73,13 +113,16 @@ function App() {
       )}
 
       {page === "search" && <Search onBookClick={handleBookClick} />}
+
       {page === "library" && <Library />}
 
       {page === "book-details" && (
         <BookDetails book={selectedBook} onReadClick={handleReadClick} />
       )}
 
-      {page === "reader" && <Reader book={selectedBook} />}
+      {page === "reader" && (
+        <Reader book={selectedBook} onBack={handleBackFromReader} />
+      )}
     </div>
   );
 }

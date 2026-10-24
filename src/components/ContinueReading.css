@@ -22,15 +22,22 @@
 
   padding: 16px;
 
-  background: transparent !important;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.09),
+    rgba(217, 107, 155, 0.045) 45%,
+    rgba(20, 12, 28, 0.32)
+  );
 
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 22px;
 
-  box-shadow: none;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 0 24px rgba(217, 107, 155, 0.035);
 
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
 
   transition: transform 0.35s ease, border-color 0.35s ease,
     box-shadow 0.35s ease;

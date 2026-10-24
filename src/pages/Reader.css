@@ -1,7 +1,11 @@
 /* Основная страница */
 .reader-page {
+  box-sizing: border-box;
+  width: 100%;
   min-height: calc(100vh - 83px);
+  min-height: calc(100dvh - 83px);
   padding: 70px 80px 100px 290px;
+  overflow-wrap: anywhere;
 
   background: radial-gradient(
       circle at 70% 20%,
@@ -13,16 +17,22 @@
   color: #f4edf5;
 }
 
+.reader-page *,
+.reader-page *::before,
+.reader-page *::after {
+  box-sizing: border-box;
+}
+
 /* Панель управления */
 .reader-toolbar {
   position: relative;
-
   width: min(1000px, 100%);
   margin: 0 auto 45px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 
   padding: 8px 12px;
 
@@ -41,13 +51,11 @@
 /* Кнопки */
 .reader-back,
 .reader-settings {
+  flex-shrink: 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
-
   background: rgba(255, 255, 255, 0.045);
-
   color: rgba(244, 237, 245, 0.72);
-
   cursor: pointer;
 
   transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease,
@@ -62,7 +70,6 @@
 .reader-settings {
   width: 42px;
   height: 42px;
-
   font-family: "Cormorant Garamond", serif;
   font-size: 18px;
 }
@@ -78,12 +85,9 @@
 /* Настройки */
 .reader-settings-panel {
   position: absolute;
-
-  top: 58px;
+  top: calc(100% + 8px);
   right: 0;
-
-  width: 220px;
-
+  width: min(260px, calc(100vw - 32px));
   padding: 18px;
 
   display: flex;
@@ -91,8 +95,7 @@
   gap: 8px;
   flex-wrap: wrap;
 
-  background: rgba(31, 24, 40, 0.9);
-
+  background: rgba(31, 24, 40, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 16px;
 
@@ -108,97 +111,80 @@
 .reader-settings-panel p {
   width: 100%;
   margin: 0 0 6px;
-
   color: #f4ddea;
-
   font-size: 12px;
   font-weight: 600;
 }
 
 .reader-settings-panel button {
+  min-height: 36px;
   padding: 7px 12px;
-
   border: 1px solid rgba(237, 141, 181, 0.28);
   border-radius: 9px;
-
   background: rgba(217, 107, 155, 0.08);
-
   color: #f4edf5;
-
   cursor: pointer;
 }
 
 .reader-font-size {
   min-width: 42px;
-
   text-align: center;
-
   color: rgba(244, 237, 245, 0.62);
-
   font-size: 12px;
   font-weight: 600;
 }
 
 .reader-theme-buttons {
   width: 100%;
-
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-
   margin-top: 6px;
 }
 
 .reader-theme-buttons button {
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 /* Заголовок */
 .reader-header {
   width: min(760px, 100%);
-
   margin: 0 auto 45px;
-
   text-align: center;
 }
 
 .reader-label {
   margin-bottom: 12px;
-
   color: #ed8db5;
-
   font-size: 11px;
   font-weight: 600;
-
   letter-spacing: 3px;
 }
 
 .reader-header h1 {
   margin: 0;
-
   font-family: "Cormorant Garamond", serif;
-
   font-size: 48px;
   font-weight: 600;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .reader-author {
   margin-top: 10px;
-
   color: rgba(244, 237, 245, 0.55);
-
   font-size: 14px;
+  overflow-wrap: anywhere;
 }
 
-/* Текст */
+/* Текст книги */
 .reader-content {
   width: min(760px, 100%);
-
+  min-width: 0;
   margin: 0 auto;
-
   padding: 45px 55px;
 
   background: rgba(255, 255, 255, 0.045);
-
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 22px;
 
@@ -211,48 +197,47 @@
 
 .reader-content p {
   margin: 0 0 24px;
-
   color: rgba(244, 237, 245, 0.78);
-
   font-family: "Cormorant Garamond", serif;
-
   line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.reader-content p:last-child {
+  margin-bottom: 0;
 }
 
 /* Главы */
 .reader-chapter {
   margin: 45px 0 30px;
-
   color: #f2d8e5;
-
   font-family: "Cormorant Garamond", serif;
-
   font-weight: 600;
-
+  line-height: 1.25;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 /* Прогресс */
 .reader-progress {
   position: fixed;
-
   left: 50%;
-  bottom: 24px;
-
+  bottom: max(24px, env(safe-area-inset-bottom));
   transform: translateX(-50%);
-
   z-index: 100;
 
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 
+  max-width: calc(100vw - 24px);
   padding: 9px 16px;
 
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
 
-  background: rgba(16, 13, 22, 0.82);
+  background: rgba(16, 13, 22, 0.9);
 
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -261,10 +246,10 @@
   -webkit-backdrop-filter: blur(18px);
 
   color: rgba(244, 237, 245, 0.48);
-
   font-size: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .reader-progress strong {
@@ -303,7 +288,6 @@
       transparent 35%
     ),
     #eee9e4;
-
   color: #302a2d;
 }
 
@@ -317,7 +301,6 @@
 
 .reader-page.light .reader-content {
   background: rgba(255, 252, 248, 0.72);
-
   border-color: rgba(80, 65, 70, 0.12);
 
   box-shadow: 0 20px 60px rgba(60, 45, 40, 0.12),
@@ -339,17 +322,30 @@
 .reader-page.light .reader-back,
 .reader-page.light .reader-settings {
   background: rgba(255, 255, 255, 0.55);
-
   border-color: rgba(80, 65, 70, 0.14);
-
   color: rgba(48, 42, 45, 0.7);
 }
 
-.reader-page.light .reader-progress {
-  background: rgba(248, 244, 240, 0.94);
-
+.reader-page.light .reader-settings-panel {
+  background: rgba(248, 244, 240, 0.97);
   border-color: rgba(80, 65, 70, 0.14);
+}
 
+.reader-page.light .reader-settings-panel p {
+  color: #403337;
+}
+
+.reader-page.light .reader-settings-panel button {
+  color: #403337;
+}
+
+.reader-page.light .reader-font-size {
+  color: rgba(48, 42, 45, 0.65);
+}
+
+.reader-page.light .reader-progress {
+  background: rgba(248, 244, 240, 0.96);
+  border-color: rgba(80, 65, 70, 0.14);
   color: rgba(48, 42, 45, 0.55);
 }
 
@@ -357,26 +353,122 @@
   color: #b05d83;
 }
 
+/* Планшеты */
+@media (max-width: 1100px) {
+  .reader-page {
+    padding-right: 30px;
+    padding-left: 270px;
+  }
+}
+
 /* Мобильная версия */
 @media (max-width: 800px) {
   .reader-page {
-    padding: 45px 20px 80px;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 28px 20px 100px;
   }
 
   .reader-toolbar {
     width: 100%;
+    margin-bottom: 30px;
     padding: 7px 8px;
   }
 
+  .reader-header {
+    margin-bottom: 28px;
+  }
+
   .reader-header h1 {
-    font-size: 38px;
+    font-size: clamp(30px, 7vw, 38px);
+  }
+
+  .reader-label {
+    font-size: 10px;
+    letter-spacing: 2px;
   }
 
   .reader-content {
+    width: 100%;
     padding: 30px 24px;
+    border-radius: 18px;
+  }
+
+  .reader-content p {
+    line-height: 1.75;
+  }
+
+  .reader-chapter {
+    margin: 34px 0 24px;
+  }
+
+  .reader-settings-panel {
+    right: 0;
+    max-width: calc(100vw - 40px);
   }
 
   .reader-progress {
-    bottom: 16px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Узкие телефоны */
+@media (max-width: 480px) {
+  .reader-page {
+    padding: 20px 12px 90px;
+  }
+
+  .reader-toolbar {
+    margin-bottom: 26px;
+  }
+
+  .reader-back {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+
+  .reader-settings {
+    width: 38px;
+    height: 38px;
+  }
+
+  .reader-header {
+    margin-bottom: 24px;
+  }
+
+  .reader-header h1 {
+    font-size: clamp(27px, 8vw, 34px);
+  }
+
+  .reader-author {
+    font-size: 13px;
+  }
+
+  .reader-content {
+    padding: 24px 17px;
+    border-radius: 16px;
+  }
+
+  .reader-content p {
+    line-height: 1.7;
+  }
+
+  .reader-settings-panel {
+    width: min(260px, calc(100vw - 24px));
+  }
+
+  .reader-progress {
+    padding: 8px 13px;
+  }
+}
+
+/* Учитываем вырезы и системные отступы телефона */
+@supports (padding: max(0px)) {
+  @media (max-width: 800px) {
+    .reader-page {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
   }
 }

@@ -1,55 +1,89 @@
-import { searchBooks } from "../services/bookApi";
-import BookCard from "./BookCard";
-import { useState } from "react";
-import "./SearchBar.css";
+import "./Sidebar.css";
 
-function SearchBar({ onBookClick }) {
-  const [query, setQuery] = useState("");
-  const [books, setBooks] = useState([]);
-
-  async function handleSearch() {
-    if (!query.trim()) {
-      return;
-    }
-
-    console.log("Кнопка работает!");
-    console.log("Запрос:", query);
-    console.log("onBookClick в SearchBar:", onBookClick);
-
-    const results = await searchBooks(query);
-
-    console.log("Книги:", results);
-
-    setBooks(results);
-  }
-
+function Sidebar({
+  page,
+  isMenuOpen,
+  onClose,
+  onHomeClick,
+  onSearchClick,
+  onLibraryClick,
+}) {
   return (
-    <div>
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Найти книгу..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
+    <>
+      {/* Затемняем фон, когда мобильное меню открыто */}
+      {isMenuOpen && (
+        <button
+          className="sidebar-backdrop"
+          onClick={onClose}
+          aria-label="Закрыть меню"
         />
+      )}
 
-        <button onClick={handleSearch}>Найти</button>
-      </div>
+      {/* Показываем боковую панель */}
+      <aside
+        className={`sidebar ${isMenuOpen ? "sidebar-open" : ""}`}
+        aria-label="Основная навигация"
+      >
+        <div className="sidebar-brand">
+          <div className="sidebar-brand-icon">✧</div>
 
-      <div className="search-results">
-        {books.length > 0 && <p>Найдено книг: {books.length}</p>}
+          <div>
+            <div className="sidebar-brand-title">Cozy</div>
+            <div className="sidebar-brand-subtitle">Library</div>
+          </div>
+        </div>
 
-        {books.map((book) => (
-          <BookCard key={book.key} book={book} onBookClick={onBookClick} />
-        ))}
-      </div>
-    </div>
+        {/* Основные разделы приложения */}
+        <nav className="sidebar-nav">
+          <button
+            className={`sidebar-item ${page === "home" ? "active" : ""}`}
+            onClick={onHomeClick}
+          >
+            <span className="sidebar-icon">⌂</span>
+            <span>Главная</span>
+          </button>
+
+          <button
+            className={`sidebar-item ${page === "search" ? "active" : ""}`}
+            onClick={onSearchClick}
+          >
+            <span className="sidebar-icon">⌕</span>
+            <span>Поиск</span>
+          </button>
+
+          <button
+            className={`sidebar-item ${page === "library" ? "active" : ""}`}
+            onClick={onLibraryClick}
+          >
+            <span className="sidebar-icon">▣</span>
+            <span>Моя библиотека</span>
+          </button>
+
+          {/* Эти разделы пока не реализованы */}
+          <button className="sidebar-item" disabled>
+            <span className="sidebar-icon">♡</span>
+            <span>Избранное</span>
+          </button>
+
+          <button className="sidebar-item" disabled>
+            <span className="sidebar-icon">✎</span>
+            <span>Заметки</span>
+          </button>
+
+          <button className="sidebar-item" disabled>
+            <span className="sidebar-icon">♫</span>
+            <span>Аудиокниги</span>
+          </button>
+        </nav>
+
+        {/* Настройки подключим, когда появится соответствующая страница */}
+        <button className="sidebar-item sidebar-settings" disabled>
+          <span className="sidebar-icon">⚙</span>
+          <span>Настройки</span>
+        </button>
+      </aside>
+    </>
   );
 }
 
-export default SearchBar;
+export default Sidebar;

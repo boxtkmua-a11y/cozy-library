@@ -8,8 +8,14 @@ const SEASONS = [
   { id: "summer", label: "Лето" },
 ];
 
-function Header({ onLibraryClick, theme, onThemeChange }) {
-  // Находим название выбранного сезона для отображения в кнопке
+function Header({
+  onLibraryClick,
+  theme,
+  onThemeChange,
+  onMenuClick,
+  isMenuOpen,
+}) {
+  // Находим название выбранного сезона
   const currentSeason =
     SEASONS.find((season) => season.id === theme) || SEASONS[0];
 
@@ -29,7 +35,7 @@ function Header({ onLibraryClick, theme, onThemeChange }) {
           >
             {SEASONS.map((season) => (
               <option key={season.id} value={season.id}>
-                {season.icon} {season.label}
+                {season.label}
               </option>
             ))}
           </select>
@@ -40,7 +46,17 @@ function Header({ onLibraryClick, theme, onThemeChange }) {
         </button>
       </div>
 
-      <button className="menu-button" aria-label="Открыть меню">
+      {/* Кнопка открывает или закрывает боковое меню */}
+      <button
+        className="menu-button"
+        //onClick={onMenuClick}
+        onClick={() => {
+          console.log("Кнопка меню нажата");
+          onMenuClick();
+        }}
+        aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
+        aria-expanded={isMenuOpen}
+      >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <line x1="4" y1="7" x2="20" y2="7" />
           <line x1="4" y1="12" x2="20" y2="12" />
