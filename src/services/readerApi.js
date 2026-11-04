@@ -58,7 +58,7 @@ function getPlainTextUrl(formats = {}) {
 }
 
 // Выполняем запрос с увеличенным тайм-аутом и понятной ошибкой
-async function fetchWithTimeout(url, timeout = 30000) {
+async function fetchWithTimeout(url, timeout = 20000) {
   const controller = new AbortController();
 
   const timer = setTimeout(() => {

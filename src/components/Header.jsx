@@ -1,46 +1,11 @@
 import "./Header.css";
 
-// Доступные сезонные темы
-const SEASONS = [
-  { id: "autumn", label: "Осень" },
-  { id: "winter", label: "Зима" },
-  { id: "spring", label: "Весна" },
-  { id: "summer", label: "Лето" },
-];
-
-function Header({
-  onLibraryClick,
-  theme,
-  onThemeChange,
-  onMenuClick,
-  isMenuOpen,
-}) {
-  // Находим название выбранного сезона
-  const currentSeason =
-    SEASONS.find((season) => season.id === theme) || SEASONS[0];
-
+function Header({ onLibraryClick, onMenuClick, isMenuOpen }) {
   return (
     <header className="header">
       <div className="logo">Cozy Library</div>
 
       <div className="header-actions">
-        <label className="season-selector">
-          <span className="season-label">Сезон</span>
-
-          <select
-            className="season-select"
-            value={theme}
-            onChange={(event) => onThemeChange(event.target.value)}
-            aria-label="Выбрать сезон оформления"
-          >
-            {SEASONS.map((season) => (
-              <option key={season.id} value={season.id}>
-                {season.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
         <button className="library-button" onClick={onLibraryClick}>
           Моя библиотека
         </button>
@@ -49,11 +14,7 @@ function Header({
       {/* Кнопка открывает или закрывает боковое меню */}
       <button
         className="menu-button"
-        //onClick={onMenuClick}
-        onClick={() => {
-          console.log("Кнопка меню нажата");
-          onMenuClick();
-        }}
+        onClick={onMenuClick}
         aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
         aria-expanded={isMenuOpen}
       >

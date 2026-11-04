@@ -8,33 +8,12 @@ import BookDetails from "./pages/BookDetails";
 import Reader from "./pages/Reader";
 import "./App.css";
 
-const THEMES = ["autumn", "winter", "spring", "summer"];
-
 function App() {
   const [page, setPage] = useState("home");
   const [selectedBook, setSelectedBook] = useState(null);
 
   // Храним состояние мобильного меню
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Загружаем сохранённую тему или используем осеннюю по умолчанию
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem("cozy-library-theme");
-    return THEMES.includes(savedTheme) ? savedTheme : "autumn";
-  });
-
-  // Сохраняем выбранную тему
-  function handleThemeChange(nextTheme) {
-    if (!THEMES.includes(nextTheme)) return;
-
-    setTheme(nextTheme);
-    localStorage.setItem("cozy-library-theme", nextTheme);
-  }
-
-  // Применяем выбранную тему ко всему документу
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
 
   // Закрываем меню при нажатии Escape
   useEffect(() => {
@@ -63,7 +42,7 @@ function App() {
     navigateTo("book-details");
   }
 
-  // Открываем Reader
+  // Открываем читалку
   function handleReadClick() {
     navigateTo("reader");
   }
@@ -76,22 +55,17 @@ function App() {
     navigateTo("reader");
   }
 
-  // Возвращаемся к описанию книги из Reader
+  // Возвращаемся к описанию книги из читалки
   function handleBackFromReader() {
     navigateTo("book-details");
   }
 
   return (
-    <div className="app" data-theme={theme}>
+    <div className="app">
       <Header
         onLibraryClick={() => navigateTo("library")}
-        theme={theme}
-        onThemeChange={handleThemeChange}
-        // Переключаем меню и выводим состояние в консоль
         onMenuClick={() => {
-          setIsMenuOpen((open) => {
-            return !open;
-          });
+          setIsMenuOpen((open) => !open);
         }}
         isMenuOpen={isMenuOpen}
       />
