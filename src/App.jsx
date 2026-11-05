@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
+
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+
 import Home from "./pages/Home";
 import Library from "./pages/Library";
 import Search from "./pages/Search";
 import BookDetails from "./pages/BookDetails";
 import Reader from "./pages/Reader";
+import Notes from "./pages/Notes";
+
 import "./App.css";
 
 // Названия новых разделов
 const sectionTitles = {
   favorites: "Избранное",
-  notes: "Мои заметки",
   audiobooks: "Аудиокниги",
   settings: "Настройки",
 };
@@ -70,6 +73,7 @@ function App() {
 
   return (
     <div className="app">
+      {/* Верхняя панель */}
       <Header
         onLibraryClick={() => navigateTo("library")}
         onMenuClick={() => {
@@ -78,6 +82,7 @@ function App() {
         isMenuOpen={isMenuOpen}
       />
 
+      {/* Боковое меню */}
       <Sidebar
         page={page}
         isMenuOpen={isMenuOpen}
@@ -105,7 +110,10 @@ function App() {
       {/* Моя библиотека */}
       {page === "library" && <Library onBookClick={handleBookClick} />}
 
-      {/* Избранное, заметки, аудиокниги и настройки */}
+      {/* Страница заметок */}
+      {page === "notes" && <Notes onBookClick={handleBookClick} />}
+
+      {/* Остальные временные разделы */}
       {sectionTitles[page] && (
         <main className="section-placeholder">
           <h1>{sectionTitles[page]}</h1>
