@@ -8,6 +8,14 @@ import BookDetails from "./pages/BookDetails";
 import Reader from "./pages/Reader";
 import "./App.css";
 
+// Названия новых разделов
+const sectionTitles = {
+  favorites: "Избранное",
+  notes: "Мои заметки",
+  audiobooks: "Аудиокниги",
+  settings: "Настройки",
+};
+
 function App() {
   const [page, setPage] = useState("home");
   const [selectedBook, setSelectedBook] = useState(null);
@@ -77,8 +85,13 @@ function App() {
         onHomeClick={() => navigateTo("home")}
         onSearchClick={() => navigateTo("search")}
         onLibraryClick={() => navigateTo("library")}
+        onFavoritesClick={() => navigateTo("favorites")}
+        onNotesClick={() => navigateTo("notes")}
+        onAudiobooksClick={() => navigateTo("audiobooks")}
+        onSettingsClick={() => navigateTo("settings")}
       />
 
+      {/* Главная страница */}
       {page === "home" && (
         <Home
           onContinueReading={handleContinueReading}
@@ -86,14 +99,26 @@ function App() {
         />
       )}
 
+      {/* Поиск книг */}
       {page === "search" && <Search onBookClick={handleBookClick} />}
 
+      {/* Моя библиотека */}
       {page === "library" && <Library onBookClick={handleBookClick} />}
 
+      {/* Избранное, заметки, аудиокниги и настройки */}
+      {sectionTitles[page] && (
+        <main className="section-placeholder">
+          <h1>{sectionTitles[page]}</h1>
+          <p>Этот раздел мы скоро наполним функциональностью.</p>
+        </main>
+      )}
+
+      {/* Информация о выбранной книге */}
       {page === "book-details" && (
         <BookDetails book={selectedBook} onReadClick={handleReadClick} />
       )}
 
+      {/* Читалка */}
       {page === "reader" && (
         <Reader book={selectedBook} onBack={handleBackFromReader} />
       )}

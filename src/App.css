@@ -182,3 +182,28 @@
     border-right-color: var(--border);
   }
 }
+/* Центрирование новых разделов справа от бокового меню */
+.section-placeholder {
+  box-sizing: border-box;
+  width: calc(100% - 280px);
+  min-height: calc(100vh - 80px);
+  margin-left: 280px;
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+/* На мобильных устройствах убираем отступ под сайдбар */
+@media (max-width: 768px) {
+  .section-placeholder {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    margin-left: 0;
+    padding: 30px 20px;
+  }
+}

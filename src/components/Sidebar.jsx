@@ -7,6 +7,10 @@ function Sidebar({
   onHomeClick,
   onSearchClick,
   onLibraryClick,
+  onFavoritesClick,
+  onNotesClick,
+  onAudiobooksClick,
+  onSettingsClick,
 }) {
   return (
     <>
@@ -19,7 +23,7 @@ function Sidebar({
         />
       )}
 
-      {/* Боковая панель с состоянием открытия */}
+      {/* Боковая панель */}
       <aside
         className={`sidebar ${isMenuOpen ? "sidebar-open" : ""}`}
         aria-label="Основная навигация"
@@ -38,6 +42,7 @@ function Sidebar({
           <button
             className={`sidebar-item ${page === "home" ? "active" : ""}`}
             onClick={onHomeClick}
+            aria-current={page === "home" ? "page" : undefined}
           >
             <span className="sidebar-icon">⌂</span>
             <span>Главная</span>
@@ -46,6 +51,7 @@ function Sidebar({
           <button
             className={`sidebar-item ${page === "search" ? "active" : ""}`}
             onClick={onSearchClick}
+            aria-current={page === "search" ? "page" : undefined}
           >
             <span className="sidebar-icon">⌕</span>
             <span>Поиск</span>
@@ -54,30 +60,48 @@ function Sidebar({
           <button
             className={`sidebar-item ${page === "library" ? "active" : ""}`}
             onClick={onLibraryClick}
+            aria-current={page === "library" ? "page" : undefined}
           >
             <span className="sidebar-icon">▣</span>
             <span>Моя библиотека</span>
           </button>
 
-          {/* Эти разделы пока не подключены к страницам */}
-          <button className="sidebar-item" disabled>
+          <button
+            className={`sidebar-item ${page === "favorites" ? "active" : ""}`}
+            onClick={onFavoritesClick}
+            aria-current={page === "favorites" ? "page" : undefined}
+          >
             <span className="sidebar-icon">♡</span>
             <span>Избранное</span>
           </button>
 
-          <button className="sidebar-item" disabled>
+          <button
+            className={`sidebar-item ${page === "notes" ? "active" : ""}`}
+            onClick={onNotesClick}
+            aria-current={page === "notes" ? "page" : undefined}
+          >
             <span className="sidebar-icon">✎</span>
             <span>Заметки</span>
           </button>
 
-          <button className="sidebar-item" disabled>
+          <button
+            className={`sidebar-item ${page === "audiobooks" ? "active" : ""}`}
+            onClick={onAudiobooksClick}
+            aria-current={page === "audiobooks" ? "page" : undefined}
+          >
             <span className="sidebar-icon">♫</span>
             <span>Аудиокниги</span>
           </button>
         </nav>
 
-        {/* Настройки подключим после создания страницы */}
-        <button className="sidebar-item sidebar-settings" disabled>
+        {/* Настройки приложения */}
+        <button
+          className={`sidebar-item sidebar-settings ${
+            page === "settings" ? "active" : ""
+          }`}
+          onClick={onSettingsClick}
+          aria-current={page === "settings" ? "page" : undefined}
+        >
           <span className="sidebar-icon">⚙</span>
           <span>Настройки</span>
         </button>
