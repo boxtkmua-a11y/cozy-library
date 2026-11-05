@@ -13,7 +13,7 @@ function Home({ onContinueReading, onBookClick }) {
         <section className="welcome-section">
           <div className="welcome-orbit"></div>
 
-          <h1 className="welcome-title">Добро пожаловать, Татьяна!</h1>
+          <h1 className="welcome-title">Добро пожаловать, дорогой читатель!</h1>
 
           <p className="welcome-text">
             «Хорошая книга — это как новое путешествие,
