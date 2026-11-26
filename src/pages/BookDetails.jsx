@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import "./BookDetails.css";
 import { getBookDetails } from "../services/bookApi";
 import { findReaderBook } from "../services/readerApi";
+import { isInLibrary, addToLibrary } from "../services/storage";
 
 function BookDetails({ book, onReadClick }) {
   const [details, setDetails] = useState(null);
-  const [isSaved, setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState(() =>
+    book ? isInLibrary(book.key) : false
+  );
   const [availability, setAvailability] = useState("checking");
 
   useEffect(() => {
@@ -62,24 +65,8 @@ function BookDetails({ book, onReadClick }) {
     };
   }, [book]);
 
-  useEffect(() => {
-    if (!book?.key) return;
-
-    const savedBooks = JSON.parse(localStorage.getItem("cozy-library") || "[]");
-
-    setIsSaved(savedBooks.some((savedBook) => savedBook.key === book.key));
-  }, [book]);
-
   function handleSaveBook() {
-    const savedBooks = JSON.parse(localStorage.getItem("cozy-library") || "[]");
-
-    const alreadySaved = savedBooks.some(
-      (savedBook) => savedBook.key === book.key
-    );
-
-    if (alreadySaved) return;
-
-    localStorage.setItem("cozy-library", JSON.stringify([...savedBooks, book]));
+    addToLibrary(book);
 
     setIsSaved(true);
   }
