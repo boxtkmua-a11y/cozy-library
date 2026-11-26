@@ -1,19 +1,11 @@
 import { useState } from "react";
 import "./Notes.css";
-
-// Безопасно загружаем данные из localStorage
-function getSavedData(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key) || "[]");
-  } catch {
-    return [];
-  }
-}
+import { getLibrary, getNotes, storeNotes } from "../services/storage";
 
 function Notes() {
   // Книги и заметки пользователя
-  const [books] = useState(() => getSavedData("cozy-library"));
-  const [notes, setNotes] = useState(() => getSavedData("cozy-notes"));
+  const [books] = useState(() => getLibrary());
+  const [notes, setNotes] = useState(() => getNotes());
 
   // Выбранная книга
   const [selectedBook, setSelectedBook] = useState(null);
@@ -29,7 +21,7 @@ function Notes() {
   // Сохраняем заметки в localStorage
   function saveNotes(updatedNotes) {
     setNotes(updatedNotes);
-    localStorage.setItem("cozy-notes", JSON.stringify(updatedNotes));
+    storeNotes(updatedNotes);
   }
 
   // Открываем форму новой заметки
