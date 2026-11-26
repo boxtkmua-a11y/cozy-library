@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -20,7 +21,9 @@ const sectionTitles = {
 };
 
 function App() {
-  const [page, setPage] = useState("home");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const page = location.pathname === "/" ? "home" : location.pathname.slice(1);
   const [selectedBook, setSelectedBook] = useState(null);
 
   // Храним состояние мобильного меню
@@ -43,7 +46,7 @@ function App() {
 
   // Переключаем страницу и закрываем меню
   function navigateTo(nextPage) {
-    setPage(nextPage);
+    navigate(nextPage === "home" ? "/" : "/" + nextPage);
     setIsMenuOpen(false);
   }
 
@@ -96,40 +99,48 @@ function App() {
         onSettingsClick={() => navigateTo("settings")}
       />
 
-      {/* Главная страница */}
-      {page === "home" && (
-        <Home
-          onContinueReading={handleContinueReading}
-          onBookClick={handleBookClick}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              onContinueReading={handleContinueReading}
+              onBookClick={handleBookClick}
+            />
+          }
         />
-      )}
-
-      {/* Поиск книг */}
-      {page === "search" && <Search onBookClick={handleBookClick} />}
-
-      {/* Моя библиотека */}
-      {page === "library" && <Library onBookClick={handleBookClick} />}
-
-      {/* Страница заметок */}
-      {page === "notes" && <Notes onBookClick={handleBookClick} />}
-
-      {/* Остальные временные разделы */}
-      {sectionTitles[page] && (
-        <main className="section-placeholder">
-          <h1>{sectionTitles[page]}</h1>
-          <p>Этот раздел мы скоро наполним функциональностью.</p>
-        </main>
-      )}
-
-      {/* Информация о выбранной книге */}
-      {page === "book-details" && (
-        <BookDetails book={selectedBook} onReadClick={handleReadClick} />
-      )}
-
-      {/* Читалка */}
-      {page === "reader" && (
-        <Reader book={selectedBook} onBack={handleBackFromReader} />
-      )}
+        <Route
+          path="/search"
+          element={<Search onBookClick={handleBookClick} />}
+        />
+        <Route
+          path="/library"
+          element={<Library onBookClick={handleBookClick} />}
+        />
+        <Route
+          path="/notes"
+          element={<Notes onBookClick={handleBookClick} />}
+        />
+        <Route
+          path="/favorites"
+          element={
+            <main className="section-placeholder">
+              <h1>{sectionTitles.favorites}</h1>
+              <p>Этот раздел мы скоро наполним функциональностью.</p>
+            </main>
+          }
+        />
+        <Route
+          path="/book-details"
+          element={
+            <BookDetails book={selectedBook} onReadClick={handleReadClick} />
+          }
+        />
+        <Route
+          path="/reader"
+          element={<Reader book={selectedBook} onBack={handleBackFromReader} />}
+        />
+      </Routes>
     </div>
   );
 }
