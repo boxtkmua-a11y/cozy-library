@@ -73,7 +73,9 @@ async function fetchWithTimeout(url, timeout = 20000) {
     return response;
   } catch (error) {
     if (error.name === "AbortError") {
-      throw new Error(`Превышено время ожидания ответа: ${url}`);
+      throw new Error(`Превышено время ожидания ответа: ${url}`, {
+        cause: error,
+      });
     }
 
     throw error;
