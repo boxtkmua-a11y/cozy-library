@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { getLibrary } from "../services/storage";
 import BookCard from "../components/BookCard";
 import "./Library.css";
 
 function Library({ onBookClick }) {
-  const [books, setBooks] = useState([]);
-
-  useEffect(() => {
-    const savedBooks = JSON.parse(localStorage.getItem("cozy-library") || "[]");
-
-    setBooks(savedBooks);
-  }, []);
+  const [books] = useState(() => getLibrary());
 
   return (
     <main className="library">
