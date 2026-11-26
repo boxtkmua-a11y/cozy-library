@@ -1,37 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import {
+  isInLibrary,
+  addToLibrary,
+  removeFromLibrary,
+} from "../services/storage";
 
 import "./BookCard.css";
 
 function BookCard({ book, isLibrary = false, onBookClick }) {
-  const [isSaved, setIsSaved] = useState(false);
-
-  useEffect(() => {
-    const savedBooks = JSON.parse(localStorage.getItem("cozy-library") || "[]");
-
-    const alreadySaved = savedBooks.some(
-      (savedBook) => savedBook.key === book.key
-    );
-
-    setIsSaved(alreadySaved);
-  }, [book.key]);
+  const [isSaved, setIsSaved] = useState(() => isInLibrary(book.key));
 
   function handleAddToLibrary(event) {
     event.stopPropagation();
 
-    const savedBooks = JSON.parse(localStorage.getItem("cozy-library") || "[]");
+    const added = addToLibrary(book);
 
-    const alreadySaved = savedBooks.some(
-      (savedBook) => savedBook.key === book.key
-    );
-
-    if (alreadySaved) {
+    if (!added) {
       alert("Эта книга уже есть в библиотеке!");
       return;
     }
-
-    const updatedBooks = [...savedBooks, book];
-
-    localStorage.setItem("cozy-library", JSON.stringify(updatedBooks));
 
     setIsSaved(true);
 
@@ -41,13 +28,7 @@ function BookCard({ book, isLibrary = false, onBookClick }) {
   function handleRemoveFromLibrary(event) {
     event.stopPropagation();
 
-    const savedBooks = JSON.parse(localStorage.getItem("cozy-library") || "[]");
-
-    const updatedBooks = savedBooks.filter(
-      (savedBook) => savedBook.key !== book.key
-    );
-
-    localStorage.setItem("cozy-library", JSON.stringify(updatedBooks));
+    removeFromLibrary(book.key);
 
     window.location.reload();
   }
